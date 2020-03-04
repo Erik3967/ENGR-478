@@ -1,0 +1,8 @@
+.\objects\my_switch.o: my_switch.c
+.\objects\my_switch.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\my_switch.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\my_switch.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\my_switch.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\my_switch.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\objects\my_switch.o: ..\..\..\..\inc/tm4c123gh6pm.h
+.\objects\my_switch.o: ..\..\..\..\driverlib/sysctl.h
