@@ -427,11 +427,6 @@
               <FilePath>.\startup_rvmdk.S</FilePath>
             </File>
             <File>
-              <FileName>switch_PinMux.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\switch_PinMux.h</FilePath>
-            </File>
-            <File>
               <FileName>driverlib.lib</FileName>
               <FileType>4</FileType>
               <FilePath>..\..\..\..\driverlib\rvmdk\driverlib.lib</FilePath>
@@ -440,6 +435,11 @@
               <FileName>Lab_6.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Lab_6.c</FilePath>
+            </File>
+            <File>
+              <FileName>Lab_6.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Lab_6.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -50,10 +50,9 @@
 #include "driverlib/gpio.h"
 #include "inc/tm4c123gh6pm.h"
 
-
-#define	RED_MASK  0x02
-#define BLUE_MASK  0x04
-#define GREEN_MASK  0x08
+#define	RED_LED  0x02
+#define BLUE_LED  0x04
+#define GREEN_LED  0x08
 //*****************************************************************************
 void
 PortFunctionInit(void)
@@ -64,7 +63,7 @@ PortFunctionInit(void)
     MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 
     //
-    // Enable pin PF0 for GPIOOutput
+    // Enable pin PF0 for GPIOInput
     //
 
     //
@@ -76,182 +75,121 @@ PortFunctionInit(void)
     //
     //Now modify the configuration of the pins that we unlocked.
     //
-    MAP_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_0);
+    MAP_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_0);
 
     //
-    // Enable pin PF3 for GPIOInput
+    // Enable pin PF3 for GPIOOutput
     //
-    MAP_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_3);
+    MAP_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_3);
 
     //
-    // Enable pin PF4 for GPIOOutput
+    // Enable pin PF4 for GPIOInput
     //
-    MAP_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_4);
+    MAP_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_4);
 
     //
-    // Enable pin PF1 for GPIOInput
+    // Enable pin PF1 for GPIOOutput
     //
-    MAP_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_1);
+    MAP_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_1);
 
     //
-    // Enable pin PF2 for GPIOInput
+    // Enable pin PF2 for GPIOOutput
     //
-    MAP_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_2);
-		
+    MAP_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_2);
 		GPIO_PORTF_PUR_R |= 0x01;
 		GPIO_PORTF_PUR_R |= 0x10;
 }
 
-int main(void)
-{
+
+int main(void){
+	int clock;
+	//set the system clock to 80MHz
+	// SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_OSC_MAIN|SYSCTL_XTAL_16MHZ);
 	
-		//initialize the GPIO ports	
-		PortFunctionInit();
-		uint8_t LED_tog;
 	
-		int state = 0;
-	  bool pressed = false;
-		int temp;
-		int timer = 0;
-    //
-    // Loop forever.
-    //
-    while(1)
-    {
+	// SysCtlDelay(3); //each value inside this function delays for 3 clock cycle, so with the value of 3, it delays it for 9 clock cycle
+	
+	
+	clock = SysCtlClockGet(); //by default, clock = 16000000
+	
+	
+  //initialize the GPIO ports 
+	PortFunctionInit();
+	
+	
+	//
+	// Loop forever
+	//
+	while(1){
+		
+		//if SW1 is pressed
+		if(GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4)== 0x00) 
+		{
 			
-			if((GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0x00 )|| GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4) == 0x00) //SW2 is pressed
-				{
-						// Turn off the LED.
-					if(!pressed)
-					{
-					
-						switch(state)
-							{
-								case 0:
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);
-									break;
-								case 1:
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x00);
-									break;
-								case 2:
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);
-									break;
-								case 3:
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x00);
-									break;
-								case 4:
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);
-									break;
-								case 5:
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x00);
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);
-									break;
-								case 6:
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x00);
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);
-									break;
-								case 7:
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x00);
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);
-									break;
-								case 8:
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x00);
-									GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);
-									break;
-							}
-						state++;
-						pressed = true;
-						SysCtlDelay(500);	
-					}
-				}
-				else
-				{
-					pressed = false;
-						switch(state)
-						{
-							case 0:
-								
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, RED_MASK);
-								break;
-							case 1:
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, BLUE_MASK);
-								break;
-							case 2:
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, GREEN_MASK);
-								break;
-							case 3:
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, RED_MASK);
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, BLUE_MASK);
-								break;
-							case 4:
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, RED_MASK);
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, GREEN_MASK);
-								break;
-							case 5:
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, BLUE_MASK);
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, GREEN_MASK);
-								break;
-							case 6:
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, RED_MASK);
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, BLUE_MASK);
-								GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, GREEN_MASK);
-								break;
-							case 7:
-									if (timer < 0) 
-									{
-										timer = 200000;
-										temp = rand() % 3 ;
-										if(temp == 0)
-										{
-											LED_tog ^= RED_MASK;
-											GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, LED_tog);
-										}
-										else if(temp == 1)
-										{
-											LED_tog ^= BLUE_MASK;
-											GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, LED_tog);
-										}
-										else
-										{
-											LED_tog ^= GREEN_MASK;
-											GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, LED_tog);
-										}
-									}
-									timer--;
-								break;
-								case 8:
-									if (timer < 0) 
-									{
-										timer = 20000;
-										temp = rand() % 3 ;
-										if(temp == 0)
-										{
-											LED_tog ^= RED_MASK;
-											GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, LED_tog);
-										}
-										else if(temp == 1)
-										{
-											LED_tog ^= BLUE_MASK;
-											GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, LED_tog);
-										}
-										else
-										{
-											LED_tog ^= GREEN_MASK;
-											GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, LED_tog);
-										}
-									}
-									timer--;
-								break;
-							default:
-								state = 0;
-						}
+			  GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, GREEN_LED); //turn green LED on
+				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00); //the red LED is off
+				
+			//while green is on
+				while(1){ 
 						
+					
+						// Delay for a bit.
+					//	SysCtlDelay(13333333/2);	// 8Mhz/3 cycles = 2666666 seconds is half a second
+					SysCtlDelay(SysCtlClockGet()/6);
+										//
+										//
+										// delay = 0.5/((1/80MHz)*3) = 13333333 
+										//
+										//
+					//	clock = SysCtlClockGet();
+
+						
+						// Toggle the green LED.
+						GPIO_PORTF_DATA_R ^=GREEN_LED; 
 							
-				}
-    }
-}
+									//if SW1 is not pressed
+									if(GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4)== 0x10)
+									{
+										break; //stops toggling
+									}
+									
+									//if SW2 is pressed
+									if(GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0)== 0x00)
+									{
+										
+										GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);  //the red LED is off
+										GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);  //the green LED is off
+									}
+				}//end of green toggle
+		}
+		else //if SW1 is not pressed
+		{
+		    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x00);     //turn green LED off
+				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, RED_LED);  //the red LED is on	
+			
+			//while red is on
+				while(1){ 
+			
+						// Delay for a bit.
+						SysCtlDelay(13333333/2);	 //4000000 clock cycle = 1 second, so 2000000 clock cycle = 0.5 second
+							
+
+						// Toggle the LED.
+						GPIO_PORTF_DATA_R ^=RED_LED; 
+					
+							
+									//if SW1 is pressed
+									 if(GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4)==0x00)  
+										{
+												 break;      //stops toggling
+										} 
+										
+									//if SW2 is pressed	
+									 if (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0x00)     
+										{    
+												 GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x00);     // red LED off
+										}			
+		 }//end of red toggle
+		}
+	} //end of while loop	
+}//end of main program

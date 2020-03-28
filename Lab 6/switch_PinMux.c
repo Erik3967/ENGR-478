@@ -100,7 +100,7 @@ PortFunctionInit(void)
 		GPIO_PORTF_PUR_R |= 0x01;
 		GPIO_PORTF_PUR_R |= 0x10;
 }
-
+/**
 int main(void)
 {
 	
@@ -253,4 +253,6 @@ int main(void)
 							
 				}
     }
+	return 0;
 }
+*/
