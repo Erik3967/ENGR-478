@@ -46,14 +46,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\</OutputDirectory>
-          <OutputName>Lab_6</OutputName>
+          <OutputDirectory>.\Objects\</OutputDirectory>
+          <OutputName>UART0_terminal</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\</ListingPath>
+          <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -354,13 +354,13 @@
             <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
-            <OneElfS>0</OneElfS>
+            <OneElfS>1</OneElfS>
             <Strict>0</Strict>
             <EnumInt>0</EnumInt>
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>0</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
@@ -432,14 +432,9 @@
               <FilePath>..\..\..\..\driverlib\rvmdk\driverlib.lib</FilePath>
             </File>
             <File>
-              <FileName>Lab_6.c</FileName>
+              <FileName>UART_sample.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Lab_6.c</FilePath>
-            </File>
-            <File>
-              <FileName>Lab_6.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Lab_6.h</FilePath>
+              <FilePath>.\UART_sample.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -47,7 +47,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\</OutputDirectory>
-          <OutputName>Lab_6</OutputName>
+          <OutputName>switch_counter_interrupt_TivaWare</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -173,11 +173,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4096</DriverSelection>
+            <DriverSelection>-1</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -432,14 +432,14 @@
               <FilePath>..\..\..\..\driverlib\rvmdk\driverlib.lib</FilePath>
             </File>
             <File>
-              <FileName>Lab_6.c</FileName>
+              <FileName>switch_counter_interrupt_TivaWare.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Lab_6.c</FilePath>
+              <FilePath>.\switch_counter_interrupt_TivaWare.c</FilePath>
             </File>
             <File>
-              <FileName>Lab_6.h</FileName>
+              <FileName>switch_counter_interrupt_TivaWare.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Lab_6.h</FilePath>
+              <FilePath>.\switch_counter_interrupt_TivaWare.h</FilePath>
             </File>
           </Files>
         </Group>

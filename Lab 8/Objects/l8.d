@@ -1,0 +1,14 @@
+.\objects\l8.o: L8.c
+.\objects\l8.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\l8.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\l8.o: L8.h
+.\objects\l8.o: ..\..\..\..\inc/hw_types.h
+.\objects\l8.o: ..\..\..\..\inc/hw_memmap.h
+.\objects\l8.o: ..\..\..\..\inc/hw_gpio.h
+.\objects\l8.o: ..\..\..\..\driverlib/sysctl.h
+.\objects\l8.o: ..\..\..\..\driverlib/pin_map.h
+.\objects\l8.o: ..\..\..\..\driverlib/rom_map.h
+.\objects\l8.o: ..\..\..\..\driverlib/gpio.h
+.\objects\l8.o: ..\..\..\..\driverlib/timer.h
+.\objects\l8.o: ..\..\..\..\driverlib/interrupt.h
+.\objects\l8.o: ..\..\..\..\inc/tm4c123gh6pm.h
